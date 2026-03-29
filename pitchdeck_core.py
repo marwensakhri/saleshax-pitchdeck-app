@@ -292,19 +292,32 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
 
     requests.put(f"{api}/sites/{site_id}", headers=headers, json={"custom_domain": custom_domain})
 
-    # Wait for SSL to be ready on the netlify.app URL (always works fast)
+    # Wait for site to be live with valid SSL
     import time
+    custom_url = f"https://{custom_domain}"
     netlify_url = f"https://{site_name}.netlify.app"
+
+    # Try custom domain first (up to 30s)
     for _ in range(15):
         try:
-            r = requests.get(netlify_url, timeout=5)
-            if r.status_code == 200 and "<!DOCTYPE" in r.text[:100].upper():
-                break
+            r = requests.get(custom_url, timeout=5, verify=True)
+            if r.status_code == 200 and "<!DOCTYPE" in r.text[:200].upper():
+                return custom_url  # Custom domain with valid SSL
         except Exception:
             pass
         time.sleep(2)
 
-    return f"https://{custom_domain}"
+    # Fallback: netlify.app (always has SSL)
+    for _ in range(5):
+        try:
+            r = requests.get(netlify_url, timeout=5)
+            if r.status_code == 200:
+                return netlify_url
+        except Exception:
+            pass
+        time.sleep(2)
+
+    return netlify_url
 
 
 def generate_pitchdeck(domain: str, api_key: str, netlify_token: str,

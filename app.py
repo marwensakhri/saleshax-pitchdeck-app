@@ -49,8 +49,8 @@ if generate and domain:
     status_text = st.empty()
     progress = st.progress(0)
 
-    steps = {"Website wird analysiert...": 15, "Claude analysiert": 50,
-             "HTML wird generiert...": 80, "Wird auf Netlify deployed...": 90}
+    steps = {"Website wird analysiert...": 15, "Claude analysiert": 45,
+             "HTML wird generiert...": 70, "Wird auf Netlify deployed...": 80}
 
     def on_status(msg):
         status_text.markdown(f"**{msg}**")
@@ -73,8 +73,8 @@ if generate and domain:
 
         st.success(f"Pitch Deck für **{result['company_name']}** ist live!")
 
-        # Always use netlify.app URL — guaranteed instant SSL
-        live_url = result["netlify_url"]
+        # URL is already verified (SSL checked in core)
+        live_url = result["live_url"]
 
         st.markdown(f"""
         <div class="result-box">
