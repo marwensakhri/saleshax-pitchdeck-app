@@ -115,11 +115,14 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
 
         WICHTIG — PLAYBOOK-PRINZIPIEN PFLICHT:
         1. Folge dem Workflow: Zielgruppen-Analyse → Trust-Kalibrierung → Opener-Typ wählen → Copy schreiben
-        2. Wähle den passenden Opener-Typ aus dem Playbook
-        3. Nutze einen der Vorwand-Typen aus dem Playbook
-        4. BRANCHENSPRACHE: Nutze die Fachsprache der ZIELKUNDEN des Prospects
-        5. Prüfe mental die Checkliste aus dem Playbook
-        6. Radikal kurz — max 4-5 Sätze im Body
+        2. OPENER: Wähle einen der 8 Opener-Typen aus dem Playbook (Qualifizierungsfrage, Bestätigung ihrer Tätigkeit, Fake-Vertrautheit, Curiosity über Veränderung, Pseudo-Kundenanfrage, Staatliche Förderung, Steuerberater-Frage, Positiver Anker). Der Opener muss so klingen, als könnte er auch von einem Interessenten/Kunden kommen — KEIN Pitch im Opener.
+        3. PLAUSIBLER VORWAND (Brücke): Nutze einen der 8 Vorwand-Typen aus dem Playbook (Kampagnen-Überschuss, Kapazitäten frei, Regionale Aktivität, Erfolgreiche Besetzung, Staatliche Förderung, Case Study, Intent-Tracking, Positiver Anker). Formel: "Ich frage, weil..." — der Vorwand muss glaubwürdig erklären, WARUM wir genau dieser Person schreiben.
+        4. VALUE PROPOSITION: Konkrete Zahlen + Zeitrahmen + Garantie. Spezifisch für die Branche der ZIELKUNDEN des Prospects.
+        5. CTA: Niedrige Hürde — "Infos schicken" oder "Beispiele schicken" bevorzugen, NICHT direkt Telefonat.
+        6. BRANCHENSPRACHE: Nutze die Fachsprache der ZIELKUNDEN des Prospects (siehe Branchenspezifisches Wording im Playbook)
+        7. Radikal kurz — max 4-5 Sätze im Body. Jeder Satz hat einen Zweck. Keine Füllwörter.
+        8. BETREFFZEILE: Kurz, lokal, kein Verkaufs-Vibe. Soll nicht verraten dass wir verkaufen wollen.
+        9. Prüfe mental die Checkliste aus dem Playbook bevor du die Copy finalisierst
 
         === KAMPAGNEN-STRUKTUR REGELN ===
         Large Scale: Gesamte Zielgruppe, WEN + welcher Angle. Max 2 Sätze.
@@ -156,8 +159,8 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
           "campaign_1_large": "Large Scale Beschreibung + Lead-Magnet",
           "campaign_2_signal": "Signal Based Beschreibung + Lead-Magnet",
           "campaign_3_micro": "Micro Beschreibung + Lead-Magnet",
-          "cold_email_subject": "Betreffzeile IM NAMEN von [company_name] an deren Kunden. Konkret, kein Spintax.",
-          "cold_email_body": "FOLGE DEM PLAYBOOK! Email IM NAMEN von [company_name]. Konkrete Platzhalter. Jeder Absatz in <p>-Tags. Signatur: Name + Rolle.",
+          "cold_email_subject": "Betreffzeile IM NAMEN von [company_name] an deren Kunden. Kurz, lokal, kein Verkaufs-Vibe. z.B. 'Anfragen München' oder 'Kurze Frage zu Mustermann GmbH'. Kein Spintax.",
+          "cold_email_body": "FOLGE DEM PLAYBOOK! Struktur: 1) Opener (aus den 8 Playbook-Typen — muss wie von einem Interessenten klingen), 2) Brücke/Vorwand ('Ich frage, weil...' — aus den 8 Playbook-Typen), 3) Value Proposition (konkrete Zahlen + Garantie), 4) CTA (niedrige Hürde, 'Infos schicken' bevorzugt). Email IM NAMEN von [company_name] an deren Zielkunden. Max 4-5 Sätze Body. Konkrete Platzhalter (Mustermann GmbH, München). Jeder Absatz in <p>-Tags. Signatur: Name + Rolle bei [company_name].",
           "target_count": "z.B. '8.000–15.000'",
           "decision_maker_title": "z.B. 'CTO, Leitung Digitalisierung'",
           "dash_branche": "z.B. 'SaaS / Software'",

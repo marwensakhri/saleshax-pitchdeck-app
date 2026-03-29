@@ -164,7 +164,7 @@ h2 em.g{color:var(--gld2)}
 .lead{
   font-size:14px;line-height:1.8;
   color:var(--mu);
-  max-width:520px;margin-top:18px;
+  max-width:520px;margin:18px auto 0;
   font-weight:300;
 }
 
@@ -856,17 +856,21 @@ section h2{margin-bottom:20px}
 
 <script>
 (function() {
+  var __roles = '{{DECISION_MAKER_TITLE}}'.split(/[,;\/]+/).map(function(s){return s.trim()}).filter(Boolean);
+  if(!__roles.length) __roles = ['Entscheider'];
+  function __r(i){return __roles[i % __roles.length]}
+
   const prospects = [
-    {company:'Rheinmetall Landsysteme GmbH', role:'CHRO Division', score:96, tag:'Enterprise'},
-    {company:'BMW Group', role:'Head of Quality', score:91, tag:'Automotive'},
-    {company:'Siemens Industrial SE', role:'Leitung Digitalisierung', score:88, tag:'Industrie'},
-    {company:'Continental AG', role:'VP Operations', score:94, tag:'Automotive'},
-    {company:'Bosch Rexroth GmbH', role:'Qualitätsleiter', score:89, tag:'Produktion'},
-    {company:'Schaeffler Technologies', role:'Head of Compliance', score:93, tag:'Enterprise'},
-    {company:'Daimler Truck AG', role:'CTO Division', score:87, tag:'Automotive'},
-    {company:'Freudenberg Group', role:'Leitung Audit', score:92, tag:'Industrie'},
-    {company:'ZF Friedrichshafen AG', role:'VP Quality', score:95, tag:'Enterprise'},
-    {company:'Mahle GmbH', role:'Digitalisierungsleiter', score:86, tag:'Produktion'},
+    {company:'Rheinmetall Landsysteme GmbH', role:__r(0), score:96, tag:'Enterprise'},
+    {company:'BMW Group', role:__r(1), score:91, tag:'Automotive'},
+    {company:'Siemens Industrial SE', role:__r(2), score:88, tag:'Industrie'},
+    {company:'Continental AG', role:__r(0), score:94, tag:'Automotive'},
+    {company:'Bosch Rexroth GmbH', role:__r(1), score:89, tag:'Produktion'},
+    {company:'Schaeffler Technologies', role:__r(2), score:93, tag:'Enterprise'},
+    {company:'Daimler Truck AG', role:__r(0), score:87, tag:'Automotive'},
+    {company:'Freudenberg Group', role:__r(1), score:92, tag:'Industrie'},
+    {company:'ZF Friedrichshafen AG', role:__r(2), score:95, tag:'Enterprise'},
+    {company:'Mahle GmbH', role:__r(0), score:86, tag:'Produktion'},
   ];
 
   let feedIdx = 0;
@@ -1491,15 +1495,19 @@ section h2{margin-bottom:20px}
 
 <script>
 (function(){
+  var __roles2 = '{{DECISION_MAKER_TITLE}}'.split(/[,;\/]+/).map(function(s){return s.trim()}).filter(Boolean);
+  if(!__roles2.length) __roles2 = ['Entscheider'];
+  function __r2(i){return __roles2[i % __roles2.length]}
+
   const companies = [
-    {name:'Müller Automotive GmbH', ind:'Zulieferer', score:94, role:'Qualitätsleiter', intent:'Interaktion vor 8 Tagen'},
-    {name:'Krause Systeme AG', ind:'Fertigung', score:91, role:'Head of QM', intent:'Vor 12 Tagen'},
-    {name:'Bauer Industries SE', ind:'Transport', score:87, role:'Leitung Compliance', intent:'Vor 21 Tagen'},
-    {name:'Fischer Technologie', ind:'OEM', score:93, role:'VP Operations', intent:'Vor 5 Tagen'},
-    {name:'Schreiber & Söhne', ind:'Prozess', score:85, role:'Digitalisierungsleiter', intent:'Vor 18 Tagen'},
-    {name:'Weber Solutions GmbH', ind:'Industrie', score:89, role:'Leitung Audit', intent:'Vor 3 Tagen'},
-    {name:'Hoffmann Gruppe AG', ind:'Automotive', score:96, role:'Head of Quality', intent:'Vor 1 Tag'},
-    {name:'Klein Maschinenbau', ind:'Produktion', score:88, role:'QM-Beauftragter', intent:'Vor 9 Tagen'},
+    {name:'Müller Automotive GmbH', ind:'Zulieferer', score:94, role:__r2(0), intent:'Interaktion vor 8 Tagen'},
+    {name:'Krause Systeme AG', ind:'Fertigung', score:91, role:__r2(1), intent:'Vor 12 Tagen'},
+    {name:'Bauer Industries SE', ind:'Transport', score:87, role:__r2(2), intent:'Vor 21 Tagen'},
+    {name:'Fischer Technologie', ind:'OEM', score:93, role:__r2(0), intent:'Vor 5 Tagen'},
+    {name:'Schreiber & Söhne', ind:'Prozess', score:85, role:__r2(1), intent:'Vor 18 Tagen'},
+    {name:'Weber Solutions GmbH', ind:'Industrie', score:89, role:__r2(2), intent:'Vor 3 Tagen'},
+    {name:'Hoffmann Gruppe AG', ind:'Automotive', score:96, role:__r2(0), intent:'Vor 1 Tag'},
+    {name:'Klein Maschinenbau', ind:'Produktion', score:88, role:__r2(1), intent:'Vor 9 Tagen'},
   ];
 
   let activeIdx = 0;
