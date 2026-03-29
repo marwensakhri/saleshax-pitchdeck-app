@@ -73,10 +73,8 @@ if generate and domain:
 
         st.success(f"Pitch Deck für **{result['company_name']}** ist live!")
 
-        # Use netlify.app URL (always has SSL) as primary, custom domain as secondary
-        netlify_url = result["netlify_url"]
-        custom_url = result["live_url"]
-        live_url = netlify_url  # Always use netlify.app — guaranteed SSL
+        # Always use netlify.app URL — guaranteed instant SSL
+        live_url = result["netlify_url"]
 
         st.markdown(f"""
         <div class="result-box">
@@ -84,8 +82,6 @@ if generate and domain:
         </div>
         """, unsafe_allow_html=True)
 
-        if custom_url and custom_url != netlify_url:
-            st.caption(f"Custom Domain (SSL kann kurz dauern): {custom_url}")
 
         col1, col2 = st.columns(2)
         with col1:

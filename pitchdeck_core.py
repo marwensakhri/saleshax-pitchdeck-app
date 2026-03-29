@@ -292,6 +292,18 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
 
     requests.put(f"{api}/sites/{site_id}", headers=headers, json={"custom_domain": custom_domain})
 
+    # Wait for SSL to be ready on the netlify.app URL (always works fast)
+    import time
+    netlify_url = f"https://{site_name}.netlify.app"
+    for _ in range(15):
+        try:
+            r = requests.get(netlify_url, timeout=5)
+            if r.status_code == 200 and "<!DOCTYPE" in r.text[:100].upper():
+                break
+        except Exception:
+            pass
+        time.sleep(2)
+
     return f"https://{custom_domain}"
 
 
