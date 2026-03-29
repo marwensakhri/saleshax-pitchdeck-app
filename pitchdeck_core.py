@@ -244,8 +244,11 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
 
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     api = "https://api.netlify.com/api/v1"
-    custom_domain = f"{company_slug}.saleshax.net"
-    site_name = f"saleshax-{company_slug}"
+    # Sanitize: Netlify site names only allow lowercase alphanumeric + hyphens
+    safe_slug = re.sub(r'[^a-z0-9-]', '-', company_slug.lower()).strip('-')
+    safe_slug = re.sub(r'-+', '-', safe_slug)[:60]
+    custom_domain = f"{safe_slug}.saleshax.net"
+    site_name = f"saleshax-{safe_slug}"
 
     site_id = None
     resp = requests.get(f"{api}/sites?filter=all&per_page=100", headers=headers)
@@ -256,10 +259,16 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
                 break
 
     if not site_id:
+        # Try with custom domain first, fallback without if it fails
         resp = requests.post(f"{api}/sites", headers=headers, json={"name": site_name, "custom_domain": custom_domain})
         if not resp.ok:
-            raise RuntimeError(f"Netlify site creation failed: {resp.status_code}")
+            # Retry without custom domain
+            resp = requests.post(f"{api}/sites", headers=headers, json={"name": site_name})
+            if not resp.ok:
+                raise RuntimeError(f"Netlify site creation failed: {resp.status_code} — {resp.text[:200]}")
         site_id = resp.json()["id"]
+        # Set custom domain separately
+        requests.put(f"{api}/sites/{site_id}", headers=headers, json={"custom_domain": custom_domain})
 
     html_bytes = html_content.encode("utf-8")
     file_hash = hashlib.sha1(html_bytes).hexdigest()
