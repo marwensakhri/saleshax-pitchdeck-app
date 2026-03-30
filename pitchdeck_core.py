@@ -113,16 +113,35 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         - KEIN Spintax — schreibe die Email als konkretes, lesbares Beispiel
         - Signatur: Konkreter Name + Rolle bei [company_name]
 
-        WICHTIG — PLAYBOOK-PRINZIPIEN PFLICHT:
-        1. Folge dem Workflow: Zielgruppen-Analyse → Trust-Kalibrierung → Opener-Typ wählen → Copy schreiben
-        2. OPENER: Wähle einen der 8 Opener-Typen aus dem Playbook (Qualifizierungsfrage, Bestätigung ihrer Tätigkeit, Fake-Vertrautheit, Curiosity über Veränderung, Pseudo-Kundenanfrage, Staatliche Förderung, Steuerberater-Frage, Positiver Anker). Der Opener muss so klingen, als könnte er auch von einem Interessenten/Kunden kommen — KEIN Pitch im Opener.
-        3. PLAUSIBLER VORWAND (Brücke): Nutze einen der 8 Vorwand-Typen aus dem Playbook (Kampagnen-Überschuss, Kapazitäten frei, Regionale Aktivität, Erfolgreiche Besetzung, Staatliche Förderung, Case Study, Intent-Tracking, Positiver Anker). Formel: "Ich frage, weil..." — der Vorwand muss glaubwürdig erklären, WARUM wir genau dieser Person schreiben.
-        4. VALUE PROPOSITION: Konkrete Zahlen + Zeitrahmen + Garantie. Spezifisch für die Branche der ZIELKUNDEN des Prospects.
-        5. CTA: Niedrige Hürde — "Infos schicken" oder "Beispiele schicken" bevorzugen, NICHT direkt Telefonat.
-        6. BRANCHENSPRACHE: Nutze die Fachsprache der ZIELKUNDEN des Prospects (siehe Branchenspezifisches Wording im Playbook)
-        7. Radikal kurz — max 4-5 Sätze im Body. Jeder Satz hat einen Zweck. Keine Füllwörter.
-        8. BETREFFZEILE: Kurz, lokal, kein Verkaufs-Vibe. Soll nicht verraten dass wir verkaufen wollen.
-        9. Prüfe mental die Checkliste aus dem Playbook bevor du die Copy finalisierst
+        === COLD EMAIL SKILL — VOLLSTÄNDIGER WORKFLOW ===
+
+        SCHRITT A — ZIELGRUPPE VERSTEHEN:
+        Bevor du die Cold Email schreibst, denke dich in die Zielkunden des Prospects rein:
+        1. TAGESREALITÄT: Was beschäftigt den Empfänger im Alltag? Was nervt ihn? Wo verliert er Geld/Zeit?
+        2. SCHON PROBIERT: Was hat die Zielgruppe wahrscheinlich schon versucht? (bestimmt Skeptizismus-Level)
+        3. EMPFÄNGLICHKEITS-TRIGGER: Was macht sie gerade empfänglich? (Saisonalität, neue Gesetze, Fachkräftemangel, Marktveränderungen)
+        4. NO-BRAINER-SCHWELLE: Was müsste man anbieten, damit ein sofortiges "Ja" kommt?
+
+        SCHRITT B — TRUST-KALIBRIERUNG:
+        Bewerte das Skeptizismus-Level der Zielgruppe für dieses spezifische Offer:
+        - Niedriger Skeptizismus: Direkter, kann schneller zum Punkt, konkreter Vorwand reicht
+        - Mittlerer Skeptizismus: Vorwand muss stark sein, Zahlen und Social Proof wichtig
+        - Hoher Skeptizismus: Professioneller Tonfall, implizite Qualifizierung ("sofern..."), Seriosität signalisieren
+
+        SCHRITT C — POSITIVE ANKER:
+        Suche skalierbare Aufhänger (müssen bei Großteil der Zielgruppe funktionieren):
+        - Google-Bewertungen, spezifisches Angebot/Produkt, regionale Präsenz, branchenspezifische Entwicklungen
+        - KEIN erzwungener persönlicher Anker — lieber starker branchenspezifischer Vorwand der bei 100% der Leads funktioniert
+        - Skalierbarkeit > Conversion pro Lead
+
+        SCHRITT D — COPY SCHREIBEN (Playbook-Prinzipien):
+        1. OPENER: Wähle aus den 8 Playbook-Typen. Muss wie von einem Interessenten klingen — KEIN Pitch.
+        2. BRÜCKE/VORWAND: "Ich frage, weil..." — aus den 8 Playbook-Vorwand-Typen.
+        3. VALUE PROPOSITION: Konkrete Zahlen + Zeitrahmen + Garantie. BRANCHENSPRACHE der Zielkunden nutzen.
+        4. CTA: Niedrige Hürde — "Infos schicken" oder "Beispiele schicken" bevorzugen.
+        5. BETREFFZEILE: Kurz, lokal, kein Verkaufs-Vibe.
+        6. Radikal kurz — max 4-5 Sätze im Body.
+        7. Prüfe mental die Checkliste aus dem Playbook.
 
         === KAMPAGNEN-STRUKTUR REGELN ===
         Large Scale: Gesamte Zielgruppe, WEN + welcher Angle. Max 2 Sätze.
@@ -148,26 +167,16 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         Kunden-/Partner-Erwähnungen:
         {chr(10).join(f"- {{c}}" for c in website_data.get('customer_mentions', []))}
 
-        === ANALYSE-SCHRITTE (PFLICHT) ===
+        === ANALYSE-SCHRITTE (PFLICHT — BEVOR DU JSON GENERIERST) ===
 
-        SCHRITT 1 — ZIELGRUPPEN-ANALYSE:
-        Bevor du IRGENDWAS schreibst, beantworte dir selbst:
-        - Was verkauft dieses Unternehmen genau?
-        - WER sind deren Kunden/Zielgruppe? (Branche, Unternehmensgröße, Entscheider-Rolle)
-        - Wie breit oder eng ist die Zielgruppe?
-        - Welche BRANCHENSPRACHE nutzen diese Zielkunden?
-
-        SCHRITT 2 — AWARENESS einschätzen:
-        - Kennt die Zielgruppe Lösungen wie die des Prospects? → Awareness-Stage bestimmen
-        - Product-Aware = kennen das Produkt bereits, Solution-Aware = kennen Lösungstyp, Problem-Aware = haben Pain aber kennen keine Lösung
-
-        SCHRITT 3 — COLD EMAIL nach Playbook:
-        - Wähle Opener-Typ basierend auf Awareness + Branche
-        - Wähle Vorwand-Typ basierend auf der Zielgruppe
-        - Value Prop muss die BRANCHENSPRACHE der ZIELKUNDEN nutzen
-        - CTA passend zur Awareness wählen
+        Durchlaufe den Cold Email Skill-Workflow aus dem System-Prompt:
+        1. Zielgruppe verstehen (Tagesrealität, Schon probiert, Empfänglichkeits-Trigger, No-Brainer-Schwelle)
+        2. Trust-Kalibrierung (Skeptizismus-Level bewerten)
+        3. Positive Anker identifizieren (skalierbar!)
+        4. Daraus die Copy ableiten
 
         ALLE Felder (Kampagnen, ICP, Email, Entscheider-Titel) müssen aus dieser Analyse abgeleitet sein.
+        Schreibe die Email so, als hättest du dich 10 Minuten in die Zielkunden des Prospects hineingedacht.
 
         Generiere eine JSON-Antwort mit exakt diesen Feldern:
 
