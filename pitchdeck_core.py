@@ -152,38 +152,54 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
 
         === COLD EMAIL SKILL — VOLLSTÄNDIGER WORKFLOW ===
 
-        SCHRITT A — ZIELGRUPPE VERSTEHEN:
-        Bevor du die Cold Email schreibst, denke dich in die Zielkunden des Prospects rein:
-        1. TAGESREALITÄT: Was beschäftigt den Empfänger im Alltag? Was nervt ihn? Wo verliert er Geld/Zeit?
-        2. SCHON PROBIERT: Was hat die Zielgruppe wahrscheinlich schon versucht? (bestimmt Skeptizismus-Level)
-        3. EMPFÄNGLICHKEITS-TRIGGER: Was macht sie gerade empfänglich? (Saisonalität, neue Gesetze, Fachkräftemangel, Marktveränderungen)
-        4. NO-BRAINER-SCHWELLE: Was müsste man anbieten, damit ein sofortiges "Ja" kommt?
+        SCHRITT A — ZIELGRUPPE & OFFER VERSTEHEN:
+        Leite aus den Website-Daten ab:
+        1. WAS ist das Offer/Produkt? Was genau verkauft der Prospect?
+        2. WER sind die Zielkunden? (Branche, Größe, Entscheider-Rolle)
+        3. TAGESREALITÄT: Was beschäftigt den Empfänger im Alltag? Was nervt ihn? Wo verliert er Geld/Zeit?
+        4. SCHON PROBIERT: Was hat die Zielgruppe wahrscheinlich schon versucht? (bestimmt Skeptizismus-Level)
+        5. EMPFÄNGLICHKEITS-TRIGGER: Was macht sie gerade empfänglich? (Saisonalität, Gesetze, Fachkräftemangel, Marktveränderungen)
+        6. NO-BRAINER-SCHWELLE: Was müsste man anbieten, damit ein sofortiges "Ja" kommt?
 
-        SCHRITT B — TRUST-KALIBRIERUNG:
-        Bewerte das Skeptizismus-Level der Zielgruppe für dieses spezifische Offer:
-        - Niedriger Skeptizismus: Direkter, kann schneller zum Punkt, konkreter Vorwand reicht
+        SCHRITT B — AWARENESS & MARKTREIFE:
+        1. AWARENESS-STAGE bestimmen: Product-Aware / Solution-Aware / Problem-Aware / No Awareness
+           - Product-Aware: Direkt zum Offer, konkreter CTA
+           - Solution-Aware: Differenzierung betonen, Mechanism zeigen
+           - Problem-Aware: Pain ansprechen, Lösung andeuten
+           - No Awareness: Curiosity-driven, Empfänglichkeits-Trigger nutzen
+        2. MARKTREIFE bewerten (aus Playbook Abschnitt 4):
+           - Verbrannter Markt? → Nicht als Agentur positionieren, Unique Mechanism betonen
+           - Hoher Skeptizismus? → Professionell, implizite Qualifizierung, Low-Friction CTA
+           - Technisch affine ZG? → Curiosity-driven, No-brainer Offer
+
+        SCHRITT C — TRUST-KALIBRIERUNG:
+        - Niedriger Skeptizismus: Direkter, konkreter Vorwand reicht
         - Mittlerer Skeptizismus: Vorwand muss stark sein, Zahlen und Social Proof wichtig
         - Hoher Skeptizismus: Professioneller Tonfall, implizite Qualifizierung ("sofern..."), Seriosität signalisieren
 
-        SCHRITT C — POSITIVE ANKER:
-        Suche skalierbare Aufhänger (müssen bei Großteil der Zielgruppe funktionieren):
-        - Google-Bewertungen, spezifisches Angebot/Produkt, regionale Präsenz, branchenspezifische Entwicklungen
-        - KEIN erzwungener persönlicher Anker — lieber starker branchenspezifischer Vorwand der bei 100% der Leads funktioniert
-        - Skalierbarkeit > Conversion pro Lead
+        SCHRITT D — VORWAND & ANKER WÄHLEN:
+        1. VORWAND-TYP wählen (aus den 8 Playbook-Typen): Kampagnen-Überschuss, Kapazitäten frei, Regionale Aktivität, Erfolgreiche Besetzung, Staatliche Förderung, Case Study, Intent-Tracking, Positiver Anker
+        2. SKALIERBARE ANKER suchen: Google-Bewertungen, Produkt/Angebot, regionale Präsenz, Branchenentwicklungen
+           - Skalierbarkeit > Conversion. KEIN erzwungener Anker — lieber starker Branchenvorwand der bei 100% funktioniert.
 
-        SCHRITT D — COPY SCHREIBEN (Playbook-Prinzipien):
-        1. OPENER: Wähle aus den 8 Playbook-Typen. Muss wie von einem Interessenten klingen — KEIN Pitch.
-        2. BRÜCKE/VORWAND: "Ich frage, weil..." — aus den 8 Playbook-Vorwand-Typen.
-        3. VALUE PROPOSITION: Konkrete Zahlen + Zeitrahmen + Garantie. BRANCHENSPRACHE der Zielkunden nutzen.
-        4. CTA: Niedrige Hürde — "Infos schicken" oder "Beispiele schicken" bevorzugen.
+        SCHRITT E — COPY SCHREIBEN:
+        1. OPENER: Wähle aus den 8 Playbook-Typen. Muss wie von Interessent klingen — KEIN Pitch.
+        2. BRÜCKE: "Ich frage, weil..." + gewählter Vorwand-Typ aus Schritt D.
+        3. VALUE PROPOSITION: Konkrete Zahlen + Zeitrahmen + Garantie. BRANCHENSPRACHE der Zielkunden nutzen (Playbook Abschnitt 5).
+        4. CTA wählen (4 Stufen nach Friction aus dem Playbook):
+           - Infos schicken (niedrigste Hürde) → bei hohem Skeptizismus
+           - Beispiele/Leads schicken → bei mittlerem Skeptizismus
+           - Prospects vorstellen → bei SaaS/B2B
+           - Telefonat → nur bei niedrigem Skeptizismus + Product-Aware
         5. BETREFFZEILE: Kurz, lokal, kein Verkaufs-Vibe.
         6. Radikal kurz — max 4-5 Sätze im Body.
-        7. Prüfe mental die Checkliste aus dem Playbook.
+        7. Prüfe mental die Checkliste aus dem Playbook (Abschnitt 7).
 
-        === KAMPAGNEN-STRUKTUR REGELN ===
-        Large Scale: Gesamte Zielgruppe, WEN + welcher Angle. Max 2 Sätze.
-        Signal Based: 1-2 konkrete Trigger-Events. Max 2 Sätze.
-        Micro: 1 konkretes Segment + Begründung. Max 2 Sätze.
+        === KAMPAGNEN-STRUKTUR ===
+        Die drei Kampagnen-Ebenen müssen direkt aus der Zielgruppen-Analyse (Schritt A) und Awareness (Schritt B) abgeleitet werden:
+        - Large Scale: Gesamte Zielgruppe + passendes Lead-Magnet basierend auf No-Brainer-Schwelle. WEN + welcher Angle. Max 2 Sätze.
+        - Signal Based: Konkretes Trigger-Event aus Empfänglichkeits-Triggern (Schritt A.5). 1-2 Trigger + Reaktion. Max 2 Sätze.
+        - Micro: Hochwertigstes Segment aus Zielgruppe + warum gerade die. Max 2 Sätze.
 
         Schreibe alle Inhalte auf Deutsch. Sei faktisch und präzise.
     """).strip()
@@ -213,16 +229,23 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         Social Proof (Testimonials, Zahlen, Logos):
         {chr(10).join(f"- {{s}}" for s in website_data.get('social_proof', [])) or '— Keiner gefunden'}
 
-        === ANALYSE-SCHRITTE (PFLICHT — BEVOR DU JSON GENERIERST) ===
+        === ANALYSE-ENTSCHEIDUNGEN (PFLICHT — BEVOR DU JSON GENERIERST) ===
 
-        Durchlaufe den Cold Email Skill-Workflow aus dem System-Prompt:
-        1. Zielgruppe verstehen (Tagesrealität, Schon probiert, Empfänglichkeits-Trigger, No-Brainer-Schwelle)
-        2. Trust-Kalibrierung (Skeptizismus-Level bewerten)
-        3. Positive Anker identifizieren (skalierbar!)
-        4. Daraus die Copy ableiten
+        Durchlaufe den Cold Email Skill-Workflow (Schritte A-E) und triff diese Entscheidungen:
 
-        ALLE Felder (Kampagnen, ICP, Email, Entscheider-Titel) müssen aus dieser Analyse abgeleitet sein.
-        Schreibe die Email so, als hättest du dich 10 Minuten in die Zielkunden des Prospects hineingedacht.
+        1. OFFER: Was verkauft der Prospect genau? An wen?
+        2. ZIELGRUPPE: Wer sind die Zielkunden? Welche Branche, Größe, Entscheider?
+        3. AWARENESS-STAGE: Product-Aware / Solution-Aware / Problem-Aware / No Awareness?
+        4. MARKTREIFE: Verbrannter Markt? Hoher Skeptizismus? Technisch affine ZG?
+        5. TRUST-LEVEL: Niedrig / Mittel / Hoch?
+        6. VORWAND-TYP: Welcher der 8 Playbook-Vorwand-Typen passt?
+        7. OPENER-TYP: Welcher der 8 Playbook-Opener-Typen passt?
+        8. CTA-TYP: Welche Friction-Stufe passt? (Infos/Beispiele/Prospects/Telefonat)
+        9. BRANCHENSPRACHE: Welche Fachbegriffe nutzt diese Zielgruppe? (Playbook Abschnitt 5)
+        10. KAMPAGNEN: Large Scale Angle aus No-Brainer-Schwelle, Signal Based aus Triggern, Micro aus bestem Segment
+
+        ALLE JSON-Felder müssen aus diesen 10 Entscheidungen abgeleitet sein.
+        Die Cold Email muss sich lesen als hättest du dich 10 Minuten in die Zielkunden hineingedacht.
 
         Generiere eine JSON-Antwort mit exakt diesen Feldern:
 
