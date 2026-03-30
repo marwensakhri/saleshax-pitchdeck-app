@@ -150,6 +150,22 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         - KEIN Spintax — schreibe die Email als konkretes, lesbares Beispiel
         - Signatur: Konkreter Name + Rolle bei [company_name]
 
+        KRITISCH — SO SCHREIBST DU KEINE COLD EMAIL:
+        ❌ VERBOTEN (generischer SaaS-Pitch):
+        "Haben Sie Schwierigkeiten mit X? Ich frage, weil wir beobachten dass... Mit [Produkt] können Sie Feature A, Feature B und Feature C. Darf ich Ihnen mehr Infos schicken?"
+        → Das ist ein Feature-Pitch, kein Playbook-konformer Cold Email!
+        → Opener verrät sofort Verkaufsabsicht
+        → Kein Playbook-Vorwand-Typ
+        → Feature-Aufzählung statt konkrete Zahlen + Garantie
+
+        ✅ SO MUSS ES AUSSEHEN (Playbook-konform):
+        "Guten Tag, Herr Mustermann, stellen Sie gerade [Rolle] ein? Ich frage, weil wir aus einer Kampagne für [Branche] in München noch Zugriff auf qualifizierte Interessenten haben. Erste Ergebnisse innerhalb von 5 Tagen — garantiert. Darf ich Ihnen ein paar Beispiele schicken?"
+        → Opener klingt wie Interessent/Kunde (nicht wie Verkäufer)
+        → Vorwand aus Playbook (Kampagnen-Überschuss)
+        → Konkrete Zahl + Zeitrahmen + Garantie
+        → Low-Friction CTA
+        → 4 Sätze, radikal kurz
+
         === COLD EMAIL SKILL — VOLLSTÄNDIGER WORKFLOW ===
 
         SCHRITT A — ZIELGRUPPE & OFFER VERSTEHEN:
@@ -259,7 +275,7 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
           "campaign_2_signal": "Signal Based Beschreibung + Lead-Magnet",
           "campaign_3_micro": "Micro Beschreibung + Lead-Magnet",
           "cold_email_subject": "Betreffzeile IM NAMEN von [company_name] an deren Kunden. Kurz, lokal, kein Verkaufs-Vibe. z.B. 'Anfragen München' oder 'Kurze Frage zu Mustermann GmbH'. Kein Spintax.",
-          "cold_email_body": "FOLGE DEM PLAYBOOK! Struktur: 1) Opener (aus den 8 Playbook-Typen — muss wie von einem Interessenten klingen), 2) Brücke/Vorwand ('Ich frage, weil...' — aus den 8 Playbook-Typen), 3) Value Proposition (konkrete Zahlen + Garantie), 4) CTA (niedrige Hürde, 'Infos schicken' bevorzugt). Email IM NAMEN von [company_name] an deren Zielkunden. Max 4-5 Sätze Body. Konkrete Platzhalter (Mustermann GmbH, München). Jeder Absatz in <p>-Tags. Signatur: Name + Rolle bei [company_name].",
+          "cold_email_body": "STRIKT PLAYBOOK-KONFORM! KEINE Feature-Aufzählungen! Struktur: 1) Opener — muss wie Interessent klingen, NICHT wie Verkäufer. KEINE Frage die Verkaufsabsicht verrät. 2) 'Ich frage, weil...' + KONKRETER Vorwand-Typ aus Playbook (Kampagnen-Überschuss/Case Study/Intent-Tracking/etc). 3) Value Prop — EINE konkrete Zahl + Zeitrahmen + Garantie. KEINE Feature-Liste! 4) Low-Friction CTA. Max 4 Sätze Body total. Jeder Absatz in <p>-Tags. Signatur: Name + Rolle bei [company_name]. Platzhalter: Mustermann GmbH, München.",
           "target_count": "z.B. '8.000–15.000'",
           "decision_maker_title": "Die EXAKTEN Entscheider-Rollen der ZIELKUNDEN des Prospects. z.B. bei HR-Software: 'HR-Leiter, Personalleiter, Geschäftsführer'. MUSS mit dem Entscheider-Feld im icp_text übereinstimmen.",
           "dash_branche": "z.B. 'SaaS / Software'",
