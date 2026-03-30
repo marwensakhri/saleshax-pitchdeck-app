@@ -74,10 +74,47 @@ def fetch_website(domain: str) -> dict:
             if len(customer_mentions) >= 5:
                 break
 
+    # --- Cold Email Skill: Zielgruppen- und Offer-Signale extrahieren ---
+    target_keywords = ["für", "zielgruppe", "geeignet für", "ideal für", "gedacht für",
+                       "branchen", "industrie", "unternehmen ab", "mitarbeiter",
+                       "who", "for teams", "for companies", "enterprise", "startup",
+                       "kmu", "mittelstand", "konzern"]
+    target_signals = []
+    for elem in soup.find_all(["p", "li", "span", "div", "h2", "h3"])[:300]:
+        txt = elem.get_text(strip=True)
+        if any(kw in txt.lower() for kw in target_keywords) and 15 < len(txt) < 300:
+            target_signals.append(txt[:200])
+            if len(target_signals) >= 8:
+                break
+
+    offer_keywords = ["pricing", "preis", "kostenlos", "free", "demo", "test",
+                      "feature", "funktion", "vorteil", "benefit", "lösung",
+                      "garantie", "roi", "ersparnis", "sparen"]
+    offer_signals = []
+    for elem in soup.find_all(["p", "li", "span", "div", "h2", "h3"])[:300]:
+        txt = elem.get_text(strip=True)
+        if any(kw in txt.lower() for kw in offer_keywords) and 15 < len(txt) < 300:
+            offer_signals.append(txt[:200])
+            if len(offer_signals) >= 8:
+                break
+
+    social_proof_keywords = ["testimonial", "bewertung", "review", "sterne", "stars",
+                             "logo", "trusted by", "vertrauen uns", "mehr als",
+                             "unternehmen nutzen", "kunden weltweit", "%", "mio", "million"]
+    social_proof = []
+    for elem in soup.find_all(["p", "li", "span", "div", "blockquote", "figure"])[:300]:
+        txt = elem.get_text(strip=True)
+        if any(kw in txt.lower() for kw in social_proof_keywords) and 10 < len(txt) < 300:
+            social_proof.append(txt[:200])
+            if len(social_proof) >= 5:
+                break
+
     return {
         "url": url, "domain": domain, "title": title,
         "meta_desc": meta_desc, "text": body_text,
         "headings": headings[:15], "customer_mentions": customer_mentions,
+        "target_signals": target_signals, "offer_signals": offer_signals,
+        "social_proof": social_proof,
     }
 
 
@@ -166,6 +203,15 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
 
         Kunden-/Partner-Erwähnungen:
         {chr(10).join(f"- {{c}}" for c in website_data.get('customer_mentions', []))}
+
+        Zielgruppen-Signale (wer nutzt das Produkt?):
+        {chr(10).join(f"- {{t}}" for t in website_data.get('target_signals', [])) or '— Keine gefunden, bitte aus Kontext ableiten'}
+
+        Offer-/Feature-Signale (was bieten sie an?):
+        {chr(10).join(f"- {{o}}" for o in website_data.get('offer_signals', [])) or '— Keine gefunden, bitte aus Kontext ableiten'}
+
+        Social Proof (Testimonials, Zahlen, Logos):
+        {chr(10).join(f"- {{s}}" for s in website_data.get('social_proof', [])) or '— Keiner gefunden'}
 
         === ANALYSE-SCHRITTE (PFLICHT — BEVOR DU JSON GENERIERST) ===
 
