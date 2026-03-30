@@ -1712,8 +1712,9 @@ function calcR(){
   document.getElementById('rv-tam').textContent=tam>=1000000?'1M+':tam>=1000?(tam/1000)+'k':tam;
   document.getElementById('rv-close').textContent=closeRate+' %';
   document.getElementById('rv-clv').textContent=clv>=1000?Math.round(clv/1000)+'k €':clv+' €';
-  var awarenessRate=parseFloat("{{AWARENESS_VALUE}}");
-  var leads=Math.round(tam*awarenessRate*0.02);
+  var aw=parseFloat("{{AWARENESS_VALUE}}");
+  var ratio=aw>=0.95?200:aw>=0.75?300:aw>=0.45?400:600;
+  var leads=Math.round(tam/ratio);
   var cltgp=Math.round(leads*(closeRate/100)*clv);
   document.getElementById('ro-leads').textContent=fmt(leads);
   document.getElementById('ro-cltgp').innerHTML=fmtE(cltgp);
