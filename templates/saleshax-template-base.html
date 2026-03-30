@@ -125,13 +125,13 @@ nav:hover{box-shadow:0 12px 48px rgba(4,3,2,.6), 0 0 0 1px var(--line3), inset 0
 @media(max-width:600px){nav{padding:11px 18px;width:calc(100% - 28px)}.nav-r{display:none}}
 
 /* ── SECTIONS ── */
-section{padding:120px 64px}
-@media(max-width:700px){section{padding:80px 20px}}
-.si{max-width:1100px;margin:0 auto}
+section{padding:clamp(80px,10vw,160px) clamp(40px,5vw,80px)}
+@media(max-width:700px){section{padding:64px 20px}}
+.si{max-width:1400px;margin:0 auto}
 
 /* ── EYEBROW LABELS ── */
 .ey{
-  font-size:9px;letter-spacing:.36em;text-transform:uppercase;
+  font-size:clamp(9px,0.7vw,11px);letter-spacing:.36em;text-transform:uppercase;
   color:var(--bl2);margin-bottom:22px;
   display:inline-flex;align-items:center;gap:14px;
   font-family:var(--mono);
@@ -144,15 +144,15 @@ section{padding:120px 64px}
 /* ── TYPOGRAPHY ── */
 h1{
   font-family:var(--serif);
-  font-size:clamp(40px,5.8vw,80px);
+  font-size:clamp(48px,6.5vw,96px);
   font-weight:400;line-height:1.0;
   letter-spacing:-.02em;
-  max-width:900px;margin-bottom:28px;
+  max-width:1100px;margin-bottom:28px;
   text-shadow:0 0 60px rgba(74,143,232,.15);
 }
 h2{
   font-family:var(--serif);
-  font-size:clamp(32px,4.2vw,58px);
+  font-size:clamp(36px,5vw,72px);
   font-weight:400;line-height:1.05;
   letter-spacing:-.02em;
   margin-bottom:16px;
@@ -162,9 +162,9 @@ h1 em,h2 em{font-style:italic;color:var(--bl2)}
 h2 em.g{color:var(--gld2)}
 
 .lead{
-  font-size:14px;line-height:1.8;
+  font-size:clamp(15px,1.1vw,18px);line-height:1.8;
   color:var(--mu);
-  max-width:520px;margin:18px auto 0;
+  max-width:680px;margin:18px auto 0;
   font-weight:300;
 }
 
@@ -193,7 +193,7 @@ h2 em.g{color:var(--gld2)}
 #hero{
   min-height:100dvh;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:140px 48px 100px;position:relative;
+  text-align:center;padding:clamp(120px,12vw,180px) clamp(40px,5vw,80px) clamp(80px,8vw,120px);position:relative;
   background:
     radial-gradient(ellipse 80% 60% at 50% -10%, rgba(15,40,90,.22) 0%, transparent 65%),
     radial-gradient(ellipse 40% 30% at 80% 70%, rgba(30,20,60,.08) 0%, transparent 60%),
@@ -208,28 +208,28 @@ h2 em.g{color:var(--gld2)}
   padding:2px;
   border-radius:var(--r-md);
   margin-bottom:36px;
-  max-width:600px;
+  max-width:720px;
   box-shadow:var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,.06);
 }
 .hero-intro-inner{
   /* Inner core */
   background:rgba(10,9,8,.6);
   border-radius:calc(var(--r-md) - 2px);
-  padding:14px 20px;
-  font-size:13px;text-align:left;line-height:1.7;
+  padding:18px 24px;
+  font-size:clamp(13px,0.95vw,16px);text-align:left;line-height:1.7;
   color:var(--mu);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.04);
 }
 .hero-intro p{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
 
 .hero-p{
-  max-width:480px;font-size:14px;line-height:1.75;
+  max-width:620px;font-size:clamp(15px,1.1vw,18px);line-height:1.75;
   color:var(--mu);margin:0 auto 44px;font-weight:300;
 }
 
 /* ── GRAPH ── */
 .graph-w{
-  width:100%;max-width:860px;
+  width:100%;max-width:1060px;
   margin:36px auto 0;padding:28px 24px 16px;
   /* double-bezel */
   border:1px solid var(--line2);
@@ -252,7 +252,7 @@ h2 em.g{color:var(--gld2)}
   margin-top:40px;
   border:1px solid var(--line2);
   border-radius:var(--r-lg);
-  max-width:620px;width:100%;
+  max-width:780px;width:100%;
   overflow:hidden;
   background:var(--bg2);
   box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.05);
@@ -274,7 +274,7 @@ h2 em.g{color:var(--gld2)}
 /* ── PROBLEM SECTION ── */
 .prob-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:start;max-width:1100px;margin:0 auto;
+  gap:80px;align-items:start;max-width:1400px;margin:0 auto;
 }
 @media(max-width:800px){.prob-grid{grid-template-columns:1fr;gap:40px}}
 
@@ -283,7 +283,7 @@ h2 em.g{color:var(--gld2)}
 /* Double-bezel problem cards */
 .prob-c{
   border:1px solid var(--line);
-  padding:24px 28px;
+  padding:clamp(24px,2vw,36px) clamp(28px,2.2vw,40px);
   background:var(--surface);
   transition:background .3s var(--ease-out), border-color .3s var(--ease-out);
   position:relative;overflow:hidden;
@@ -297,8 +297,8 @@ h2 em.g{color:var(--gld2)}
   font-family:var(--mono);font-size:11px;color:var(--dim);
   letter-spacing:.1em;margin-bottom:9px;
 }
-.prob-c h3{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:7px;letter-spacing:-.01em}
-.prob-c p{font-size:12px;line-height:1.65;color:var(--mu)}
+.prob-c h3{font-family:var(--serif);font-size:clamp(19px,1.4vw,22px);font-weight:400;margin-bottom:7px;letter-spacing:-.01em}
+.prob-c p{font-size:clamp(12px,0.85vw,14px);line-height:1.65;color:var(--mu)}
 
 /* Cost card */
 .cost-card{
@@ -315,7 +315,7 @@ h2 em.g{color:var(--gld2)}
 .cost-bar .cb-v{font-family:var(--mono);font-size:10px;margin-bottom:3px}
 
 /* ── ADS SECTION ── */
-.scatter{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:32px 0;max-width:960px}
+.scatter{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:32px 0;max-width:1200px}
 @media(max-width:600px){.scatter{grid-template-columns:1fr}}
 .scatter-c{
   border:1px solid var(--line);padding:32px;text-align:center;
@@ -323,26 +323,26 @@ h2 em.g{color:var(--gld2)}
   transition:background .3s var(--ease-out);
 }
 .scatter-c:hover{background:var(--surface2)}
-.scatter-c h4{font-family:var(--serif);font-size:21px;font-weight:400;margin-bottom:18px;letter-spacing:-.01em}
+.scatter-c h4{font-family:var(--serif);font-size:clamp(21px,1.5vw,26px);font-weight:400;margin-bottom:18px;letter-spacing:-.01em}
 .scatter-c svg{width:100%;max-width:280px;height:auto}
 .scatter-c .sc-sub{font-size:11px;color:var(--mu);margin-top:14px;font-family:var(--mono)}
 
-.ads-args{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:1px;max-width:960px;margin-left:auto;margin-right:auto}
+.ads-args{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:1px;max-width:1200px;margin-left:auto;margin-right:auto}
 @media(max-width:600px){.ads-args{grid-template-columns:1fr}}
 .ads-arg{
   border:1px solid var(--line);padding:24px 28px;background:var(--surface);
   transition:background .3s var(--ease-out);
 }
 .ads-arg:hover{background:rgba(217,79,79,.03)}
-.ads-arg h4{font-family:var(--serif);font-size:16px;font-weight:400;margin-bottom:7px;color:var(--red);letter-spacing:-.01em}
-.ads-arg p{font-size:12px;color:var(--mu);line-height:1.6}
+.ads-arg h4{font-family:var(--serif);font-size:clamp(16px,1.15vw,19px);font-weight:400;margin-bottom:7px;color:var(--red);letter-spacing:-.01em}
+.ads-arg p{font-size:clamp(12px,0.85vw,14px);color:var(--mu);line-height:1.6}
 
 /* ── BRIDGE ── */
 .bridge{
   border:1px solid var(--blB);
-  padding:72px 56px;text-align:center;
+  padding:clamp(56px,5vw,96px) clamp(40px,4vw,72px);text-align:center;
   background:linear-gradient(135deg,rgba(61,127,212,.06),rgba(61,127,212,.02));
-  max-width:880px;margin:0 auto;
+  max-width:1100px;margin:0 auto;
   border-radius:var(--r-xl);
   box-shadow:var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,.06);
   position:relative;overflow:hidden;
@@ -354,7 +354,7 @@ h2 em.g{color:var(--gld2)}
 @media(max-width:600px){.bridge{padding:48px 28px}}
 .bridge-t{
   font-family:var(--serif);
-  font-size:clamp(22px,3vw,32px);
+  font-size:clamp(26px,3.5vw,40px);
   font-weight:400;line-height:1.3;
   letter-spacing:-.01em;
 }
@@ -373,14 +373,14 @@ h2 em.g{color:var(--gld2)}
 .sol-item.vis{opacity:1;transform:translateY(0)}
 .sol-item:hover{background:var(--surface2)}
 @media(max-width:500px){.sol-item{grid-template-columns:1fr}}
-.sol-item .sol-prob{font-size:12px;color:var(--red);font-family:var(--mono);display:flex;align-items:center;gap:8px}
+.sol-item .sol-prob{font-size:clamp(12px,0.85vw,14px);color:var(--red);font-family:var(--mono);display:flex;align-items:center;gap:8px}
 .sol-item .sol-prob::before{content:'✕';font-size:10px;color:var(--red);opacity:.7;flex-shrink:0}
-.sol-item .sol-fix{font-size:12px;color:var(--grn);font-weight:500;font-family:var(--mono);display:flex;align-items:center;gap:8px}
+.sol-item .sol-fix{font-size:clamp(12px,0.85vw,14px);color:var(--grn);font-weight:500;font-family:var(--mono);display:flex;align-items:center;gap:8px}
 .sol-item .sol-fix::before{content:'✓';font-size:10px;color:var(--grn);flex-shrink:0}
 
 /* ── TINDER MATCH ── */
 .match-wrap{
-  margin:44px auto;max-width:720px;
+  margin:44px auto;max-width:900px;
   border:1px solid var(--line2);
   background:var(--bg2);
   border-radius:var(--r-xl);
@@ -464,7 +464,7 @@ h2 em.g{color:var(--gld2)}
   border:1px solid var(--grnB);border-radius:999px;
   font-family:var(--mono);
 }
-.dash-b{display:grid;grid-template-columns:180px 1fr 240px;min-height:300px}
+.dash-b{display:grid;grid-template-columns:220px 1fr 280px;min-height:380px}
 @media(max-width:900px){.dash-b{grid-template-columns:1fr;min-height:auto}}
 .d-side{background:var(--bg);border-right:1px solid var(--line);padding:14px}
 @media(max-width:900px){.d-side{border-right:none;border-bottom:1px solid var(--line)}}
@@ -502,7 +502,7 @@ h2 em.g{color:var(--gld2)}
 .dl-r .sc.hi{color:var(--grn)}.dl-r .sc.md{color:var(--gld)}
 .dl-r .dt{width:6px;height:6px;border-radius:50%;justify-self:center}
 .dl-r .dt.g{background:var(--grn)}.dl-r .dt.y{background:var(--gld)}
-.d-det{padding:18px}
+.d-det{padding:24px}
 .d-det h4{font-family:var(--serif);font-size:16px;font-weight:400;margin-bottom:12px;letter-spacing:-.01em}
 .dd-r{
   display:flex;justify-content:space-between;align-items:center;
@@ -531,27 +531,39 @@ h2 em.g{color:var(--gld2)}
   font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--bl2);
   font-family:var(--mono);
 }
+.case-heading{
+  font-family:var(--serif);
+  font-size:clamp(28px,3.5vw,44px);
+  font-weight:400;letter-spacing:-.02em;
+  color:var(--wh);margin:16px 0 4px;line-height:1.1;
+}
+.case-subtitle{
+  font-size:clamp(13px,1vw,16px);
+  color:var(--mu);font-family:var(--mono);
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:8px;
+}
 .case-num{
   font-family:var(--serif);
-  font-size:clamp(40px,5.5vw,64px);
+  font-size:clamp(44px,6vw,76px);
   font-weight:400;color:var(--grn);margin:8px 0;
   letter-spacing:-.02em;
 }
 .case-ctx{
-  border:1px solid var(--line);padding:24px 28px;
+  border:1px solid var(--line);padding:clamp(24px,2vw,36px) clamp(28px,2.2vw,40px);
   background:var(--surface);margin:14px 0;
   border-radius:var(--r-md);
   transition:background .25s var(--ease-out);
 }
 .case-ctx:hover{background:var(--surface2)}
-.case-ctx h4{font-family:var(--serif);font-size:15px;font-weight:400;margin-bottom:7px;color:var(--bl2);letter-spacing:-.01em}
+.case-ctx h4{font-family:var(--serif);font-size:clamp(15px,1.1vw,18px);font-weight:400;margin-bottom:7px;color:var(--bl2);letter-spacing:-.01em}
 .case-ctx.red h4{color:var(--red)}.case-ctx.grn h4{color:var(--grn)}
-.case-ctx p{font-size:12px;line-height:1.65;color:var(--mu)}
+.case-ctx p{font-size:clamp(12px,0.85vw,14px);line-height:1.65;color:var(--mu)}
 .case-camp{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;margin:4px 0}
 @media(max-width:600px){.case-camp{grid-template-columns:1fr}}
 .case-camp-i{
   background:var(--bg2);border:1px solid var(--line);
-  padding:14px;font-size:11px;color:var(--mu);line-height:1.55;
+  padding:14px;font-size:clamp(11px,0.8vw,13px);color:var(--mu);line-height:1.55;
 }
 .case-camp-i strong{
   display:block;color:var(--wh);font-weight:500;
@@ -560,7 +572,7 @@ h2 em.g{color:var(--gld2)}
 }
 .case-hl{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
 .case-hl-i{
-  border:1px solid var(--line);padding:8px 16px;font-size:10px;color:var(--mu);
+  border:1px solid var(--line);padding:8px 16px;font-size:clamp(10px,0.75vw,12px);color:var(--mu);
   display:flex;align-items:center;gap:7px;background:var(--surface);
   border-radius:999px;
   font-family:var(--mono);
@@ -574,7 +586,7 @@ h2 em.g{color:var(--gld2)}
   /* Outer shell */
   border:1px solid var(--line2);
   padding:2px;
-  margin:18px 0;max-width:640px;
+  margin:18px 0;max-width:800px;
   border-radius:var(--r-xl);
   background:rgba(255,255,255,.02);
   box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.06);
@@ -588,7 +600,7 @@ h2 em.g{color:var(--gld2)}
   /* Inner core */
   background:var(--bg2);
   border-radius:calc(var(--r-xl) - 2px);
-  padding:40px;
+  padding:clamp(32px,3vw,56px);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
 }
 .msg-badge{
@@ -597,9 +609,9 @@ h2 em.g{color:var(--gld2)}
   margin-bottom:12px;border:1px solid var(--grnB);
   border-radius:999px;font-family:var(--mono);
 }
-.msg-from{font-size:16px;font-weight:500;margin-bottom:3px}
+.msg-from{font-size:clamp(16px,1.15vw,19px);font-weight:500;margin-bottom:3px}
 .msg-role{font-size:11px;color:var(--mu);margin-bottom:12px;line-height:1.5}
-.msg-text{font-size:13px;line-height:1.7;color:var(--mu)}
+.msg-text{font-size:clamp(13px,0.95vw,15px);line-height:1.7;color:var(--mu)}
 .msg-text p{margin-bottom:7px}
 .msg-co{font-size:10px;color:var(--dim);margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--mono)}
 
@@ -627,7 +639,7 @@ h2 em.g{color:var(--gld2)}
 .camp-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:28px 0}
 @media(max-width:700px){.camp-g{grid-template-columns:1fr}}
 .camp-c{
-  border:1px solid var(--line);padding:28px 32px;background:var(--surface);
+  border:1px solid var(--line);padding:clamp(28px,2.2vw,40px) clamp(32px,2.5vw,44px);background:var(--surface);
   transition:background .3s var(--ease-out),border-color .3s var(--ease-out);
   position:relative;border-radius:14px;
   border-top:3px solid var(--bl);
@@ -635,8 +647,8 @@ h2 em.g{color:var(--gld2)}
 .camp-c:hover{background:rgba(61,127,212,.04);border-color:var(--line2)}
 .camp-c.hl{background:var(--blG);border-color:var(--blB);border-top:3px solid var(--gld)}
 .camp-c.grn-top{border-top:3px solid var(--grn)}
-.camp-c h3{font-family:var(--sans);font-size:18px;font-weight:500;color:var(--wh);margin-bottom:12px;letter-spacing:-.01em}
-.camp-c p{font-size:14px;color:rgba(240,237,232,.65);line-height:1.75}
+.camp-c h3{font-family:var(--sans);font-size:clamp(18px,1.3vw,22px);font-weight:500;color:var(--wh);margin-bottom:12px;letter-spacing:-.01em}
+.camp-c p{font-size:clamp(14px,1vw,16px);color:rgba(240,237,232,.65);line-height:1.75}
 
 /* ── ICP / EMAIL ── */
 .icp{
@@ -655,19 +667,19 @@ h2 em.g{color:var(--gld2)}
   background:var(--bg3);padding:11px 20px;border-bottom:1px solid var(--line);
   font-size:10px;color:var(--mu);letter-spacing:.1em;font-family:var(--mono);
 }
-.email-b{padding:20px;font-size:12px;line-height:1.75}
+.email-b{padding:20px;font-size:clamp(12px,0.85vw,14px);line-height:1.75}
 .email-b p{margin-bottom:8px}
 
 /* ── CALCULATOR SLIDERS ── */
 .slider-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:28px 0}
 @media(max-width:600px){.slider-grid{grid-template-columns:1fr}}
 .s-field{
-  padding:24px 26px;border:1px solid var(--line);background:var(--surface);
+  padding:clamp(24px,2vw,36px) clamp(26px,2.2vw,38px);border:1px solid var(--line);background:var(--surface);
   transition:background .25s var(--ease-out);
 }
 .s-field:hover{background:var(--surface2)}
 .s-field label{
-  display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  display:block;font-size:clamp(9px,0.7vw,11px);letter-spacing:.18em;text-transform:uppercase;
   color:var(--mu);margin-bottom:10px;font-family:var(--mono);
 }
 .s-field .s-row{display:flex;align-items:center;gap:16px}
@@ -689,12 +701,12 @@ h2 em.g{color:var(--gld2)}
 }
 .s-field select option{background:#1a1a1a}
 .s-val{
-  font-family:var(--mono);font-size:22px;font-weight:500;color:var(--bl2);
+  font-family:var(--mono);font-size:clamp(22px,1.6vw,28px);font-weight:500;color:var(--bl2);
   min-width:56px;text-align:right;
 }
 
 .rechner-output{
-  border:1px solid var(--grnB);padding:44px;text-align:center;margin-top:1px;
+  border:1px solid var(--grnB);padding:clamp(36px,3vw,64px);text-align:center;margin-top:1px;
   background:linear-gradient(135deg,var(--grnG),rgba(46,187,126,.02));
   border-radius:0 0 var(--r-lg) var(--r-lg);
 }
@@ -702,7 +714,7 @@ h2 em.g{color:var(--gld2)}
 .rechner-item{text-align:center}
 .rechner-val{
   font-family:var(--serif);
-  font-size:clamp(34px,4.5vw,52px);
+  font-size:clamp(38px,5vw,64px);
   font-weight:400;color:var(--grn);
   letter-spacing:-.02em;
 }
@@ -710,7 +722,7 @@ h2 em.g{color:var(--gld2)}
 
 /* ── GUARANTEE ── */
 .guar{
-  border:1px solid var(--blB);padding:56px 48px;text-align:center;
+  border:1px solid var(--blB);padding:clamp(48px,4vw,80px) clamp(40px,3.5vw,64px);text-align:center;
   background:linear-gradient(135deg,var(--blG),rgba(61,127,212,.02));
   border-radius:var(--r-xl);
   box-shadow:var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,.06);
@@ -725,7 +737,7 @@ h2 em.g{color:var(--gld2)}
   max-width:440px;margin:24px auto 0;
 }
 .guar-pts li{
-  font-size:14px;font-weight:300;
+  font-size:clamp(14px,1vw,17px);font-weight:300;
   display:flex;align-items:center;gap:12px;text-align:left;
 }
 .chk{
@@ -1374,6 +1386,8 @@ section h2{margin-bottom:20px}
 <div class="si">
   <div class="ey gold fi">Nachgewiesene Ergebnisse</div>
   <div class="case-top fi"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAFHklEQVR4AeycW4hVZRTH90kbi4ruE5UQSIUavWQUPVgTQdRTRVAEBtVD9DDVS4ZmhlBgiYGURZCl2UMaRRoVlYqoD15exAuo6DAy3m8oKOL9+Ptvvm+cfTy3j3WUo7OG9dvrW2t/a1/+e+1vn6e5JvM/kwIuoEm+LHMBXUCjAsZy70AX0KiAsdw70AU0KmAs9w50AY0KGMu9A11AowLG8sHYgUbJiuUuYFGP5MgFTJasWOACFvVIjlzAZMmKBS5gUY/kyAVMlqxY4AIW9UiOXMBkyYoFLmBRj+TIBUyWrFjgAhb1SI5cwGTJigVXiIDFi26nyAU0Pg0X0AU0KmAs9w50AY0KGMu9A11AowLGcu/Aq1HAcrl8PayE72Ca8R4vaXlTHchN3AHXNnslzH252bk15t1M/sdSqfQOfizkxnEfygeJG+qGwmL4OLG04fSGAnLSlRzlANwODY35ZSbNBIsdpngcx/oKvxSifRIHif5b5nfDX9BSqysgN/A4ZxO4bCdxnwb4F+EMyM6xeQVu1L5KyKt7T+FlR9jcpTn4kXAauqAPZCfZ3MD+W0Gd9y7+Q3I7QLlh+BGwC/bARCgxJ8N3g3JiA+ObQl4PvpPxEeghX4IZoHliPGN16Fj8TJgCyotPGQ+hrqbVFZCqXQFcNiPLskkgu43NOHgNvoD58BlcMEac/AHcFlgDmvsPXjf/DF43PhQ/F6bA99ABk+EYrAfZHDbqvKP44fAIr/a9cDdjveoT8LK5ygmCp0Drp84xhrEE7MKPgG+gR/MEYz34+/GyN9jMV14wPg4PQ02rKyAH2UmlwGXTiX/WAP6H7YFF+N0wDCptFAmJ/T5+K3wNeqISlmFuCzmu1ru3iU7AGGIJuI6xbBbxbDhDoBv/DR9Noj8ZgmM8sOHwILG6vJOaMuha+/DzQMd8E6/rYFpuy9jGtXUI+zYRR9PycV0Mqvm6AlYr4ALVJVoXI0uYdw9Us8dCMs7VxYZUTSfBa+6ss2M5+x4F1et113USXmQd3IO+8Dns1XqtZYNhujUjoLpCR9brIK8avUq38LSUu4/kPqhmi0Oyi7kdAdXMCvmWOAR5jwOt4fgLYBXj1aAPEe4iO0nmeeY9ERiN1zJCOt0kRqOq18OEdVzonjCW20ys13stgV4ZXG6n2HayT6/1RsbbYAmxFmWxg3g0tNL+5mADlxC9ks+Sq2YjSb4KLbGGAvJ0JNJHnO0HmEOsjnxJY9CaOB7/AfwHshfY6MfvT8w9yFgXrA+QPgZCT3sv+UPwOWgNxeU2na3m4IrGA9Brthavc8Wd+rL+ynl6SPSyb6pg/By8BdEWxgFz9Utiv+YN4E726z51fob9piYQ/YnKQUMBVcBJp8JEEWK9KnlMTh+AL/ELwr5/Gef7Qnw2xsFPwu8PaN6fmifITYaBC7zSWrP0ddSHRV/635UUzD0Es8NYHzkdT0wjP095wfgX+QjxH6B5kQPEvaBfAHFaRqyPjwTvz1UOmhKwsugyx/rw5CJx3qe5qV5821g7C6j1djNKiW6Ek60gbitrWwFRawKMCujHb1sJFy+mbQWMF9ju3gU0PiEXsJUCGo81KMu9A42P3QV0AY0KGMu9A11AowLGcu9AF9CogLHcO9AFNCpgLPcOdAGNChjLB30HGvXz/97mAloVMNb7K+wCGhUwlnsHuoBGBYzl3oEuoFEBY7l3oAtoVMBY7h3oAhoVMJZfiR1ovOXWlruARj1dQBfQqICx/DwAAAD//2kALogAAAAGSURBVAMAmV6/sLg0xwEAAAAASUVORK5CYII=" alt="TalentHafen" class="case-logo"><span class="case-tag">HR-Software · 50–500 MA</span></div>
+  <h3 class="case-heading fi">Case Study: TalentHafen</h3>
+  <p class="case-subtitle fi">HR-Software / HR-Tech</p>
   <div class="case-num fi">1,86 Mio. € CLTGP</div>
   <div class="case-ctx fi"><h4>Ausgangslage</h4><p>Gutes Produkt, validierter Vertriebsprozess — aber begrenztes Wachstum: Die Zielgruppe war deutlich größer als die Reichweite des bestehenden Vertriebs.</p></div>
   <div class="case-ctx grn fi"><h4>Was wir gemacht haben</h4><p>Gezieltes Ansprechen interessierter Unternehmen auf KMU- und Enterprise-Ebene gleichzeitig. Die gesamte Zielgruppe wurde systematisch erschlossen.</p></div>
@@ -1400,6 +1414,8 @@ section h2{margin-bottom:20px}
 <section class="case-s" id="case-kh">
 <div class="si">
   <div class="case-top fi"><img src="data:image/png;base64,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" alt="Kanzleihafen" class="case-logo"><span class="case-tag">HR-Tech · Steuerfachangestellte</span></div>
+  <h3 class="case-heading fi">Case Study: Kanzleihafen</h3>
+  <p class="case-subtitle fi">Legal Tech / Kanzlei-Software</p>
   <div class="case-num fi">412.000 € CLTGP</div>
   <div class="case-ctx fi"><h4>Ausgangslage</h4><p>Funktionierendes Produkt, funktionierender Vertriebsprozess — aber sehr enge Nische (ausschließlich Steuerfachangestellte). Planbar skalieren war nicht möglich.</p></div>
   <div class="case-ctx grn fi"><h4>Mehrstufige Kampagnenstruktur</h4>
@@ -1431,6 +1447,8 @@ section h2{margin-bottom:20px}
 <section class="case-s" id="case-as">
 <div class="si">
   <div class="case-top fi"><img src="data:image/png;base64,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" alt="autosecure" class="case-logo"><span class="case-tag">Sicherheitssoftware · Autohäuser · No-Awareness</span></div>
+  <h3 class="case-heading fi">Case Study: autosecure</h3>
+  <p class="case-subtitle fi">Automotive / Automotive Security</p>
   <div class="case-num fi">120.000 € CLTGP</div>
   <div class="case-ctx red fi"><h4>Warum das die schwierigste Zielgruppe ist</h4><p>Sicherheitsdienstleistungen sind die am schwersten verkaufbaren Produkte. Offer überproportional teuer, Zielgruppe (nur Autohäuser) extrem klein, Awareness minimal — „brauche ich nicht, passt alles." Sale Cycles 6–12 Monate. Trotzdem: 4 Monate Zusammenarbeit — bereits mehrere qualifizierte Anfragen.</p></div>
   <div class="case-ctx grn fi"><h4>Kampagnenstruktur + Lead-Magneten</h4>
@@ -1694,8 +1712,9 @@ function calcR(){
   document.getElementById('rv-tam').textContent=tam>=1000000?'1M+':tam>=1000?(tam/1000)+'k':tam;
   document.getElementById('rv-close').textContent=closeRate+' %';
   document.getElementById('rv-clv').textContent=clv>=1000?Math.round(clv/1000)+'k €':clv+' €';
-  var leads=Math.round(tam*0.02*0.6);
-  var cltgp=Math.round(leads*(closeRate/100)*clv*0.5);
+  var awarenessRate=parseFloat("{{AWARENESS_VALUE}}");
+  var leads=Math.round(tam*awarenessRate*0.02);
+  var cltgp=Math.round(leads*(closeRate/100)*clv);
   document.getElementById('ro-leads').textContent=fmt(leads);
   document.getElementById('ro-cltgp').innerHTML=fmtE(cltgp);
 }
