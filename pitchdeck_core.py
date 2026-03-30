@@ -148,6 +148,27 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         Kunden-/Partner-Erwähnungen:
         {chr(10).join(f"- {{c}}" for c in website_data.get('customer_mentions', []))}
 
+        === ANALYSE-SCHRITTE (PFLICHT) ===
+
+        SCHRITT 1 — ZIELGRUPPEN-ANALYSE:
+        Bevor du IRGENDWAS schreibst, beantworte dir selbst:
+        - Was verkauft dieses Unternehmen genau?
+        - WER sind deren Kunden/Zielgruppe? (Branche, Unternehmensgröße, Entscheider-Rolle)
+        - Wie breit oder eng ist die Zielgruppe?
+        - Welche BRANCHENSPRACHE nutzen diese Zielkunden?
+
+        SCHRITT 2 — AWARENESS einschätzen:
+        - Kennt die Zielgruppe Lösungen wie die des Prospects? → Awareness-Stage bestimmen
+        - Product-Aware = kennen das Produkt bereits, Solution-Aware = kennen Lösungstyp, Problem-Aware = haben Pain aber kennen keine Lösung
+
+        SCHRITT 3 — COLD EMAIL nach Playbook:
+        - Wähle Opener-Typ basierend auf Awareness + Branche
+        - Wähle Vorwand-Typ basierend auf der Zielgruppe
+        - Value Prop muss die BRANCHENSPRACHE der ZIELKUNDEN nutzen
+        - CTA passend zur Awareness wählen
+
+        ALLE Felder (Kampagnen, ICP, Email, Entscheider-Titel) müssen aus dieser Analyse abgeleitet sein.
+
         Generiere eine JSON-Antwort mit exakt diesen Feldern:
 
         {{
@@ -162,7 +183,7 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
           "cold_email_subject": "Betreffzeile IM NAMEN von [company_name] an deren Kunden. Kurz, lokal, kein Verkaufs-Vibe. z.B. 'Anfragen München' oder 'Kurze Frage zu Mustermann GmbH'. Kein Spintax.",
           "cold_email_body": "FOLGE DEM PLAYBOOK! Struktur: 1) Opener (aus den 8 Playbook-Typen — muss wie von einem Interessenten klingen), 2) Brücke/Vorwand ('Ich frage, weil...' — aus den 8 Playbook-Typen), 3) Value Proposition (konkrete Zahlen + Garantie), 4) CTA (niedrige Hürde, 'Infos schicken' bevorzugt). Email IM NAMEN von [company_name] an deren Zielkunden. Max 4-5 Sätze Body. Konkrete Platzhalter (Mustermann GmbH, München). Jeder Absatz in <p>-Tags. Signatur: Name + Rolle bei [company_name].",
           "target_count": "z.B. '8.000–15.000'",
-          "decision_maker_title": "z.B. 'CTO, Leitung Digitalisierung'",
+          "decision_maker_title": "Die EXAKTEN Entscheider-Rollen der ZIELKUNDEN des Prospects. z.B. bei HR-Software: 'HR-Leiter, Personalleiter, Geschäftsführer'. MUSS mit dem Entscheider-Feld im icp_text übereinstimmen.",
           "dash_branche": "z.B. 'SaaS / Software'",
           "dash_groesse": "z.B. '50+ MA'",
           "dash_awareness": "z.B. 'Solution-Aware'",
