@@ -272,19 +272,26 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
           "clv_value": "Zahl, z.B. 35000"
         }}
 
-        Antworte NUR mit dem JSON-Objekt, kein anderer Text.
+        WICHTIG: Antworte NUR mit dem JSON-Objekt. Kein Text davor oder danach. Keine Erklärungen. Nur valides JSON. Stelle sicher dass alle Strings korrekt escaped sind (besonders Anführungszeichen in HTML-Attributen).
     """).strip()
 
     message = client.messages.create(
-        model=MODEL, max_tokens=2048,
+        model=MODEL, max_tokens=4096,
         messages=[{"role": "user", "content": user_prompt}],
         system=system_prompt,
     )
 
     raw = message.content[0].text.strip()
+    # Try to extract JSON from markdown code block first
     json_match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", raw)
     if json_match:
         raw = json_match.group(1)
+    else:
+        # Try to find JSON object directly (first { to last })
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            raw = raw[start:end + 1]
 
     return json.loads(raw)
 
