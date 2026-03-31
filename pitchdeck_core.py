@@ -417,41 +417,38 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
 
     requests.put(f"{api}/sites/{site_id}", headers=headers, json={"custom_domain": custom_domain})
 
-    # Force HTTPS via Netlify API
+    # Provision SSL for custom domain via Netlify API
     try:
         requests.post(f"{api}/sites/{site_id}/ssl", headers=headers)
     except Exception:
         pass
 
-    # Wait for site to be live with valid SSL
     import time
     custom_url = f"https://{custom_domain}"
     netlify_url = f"https://{site_name}.netlify.app"
 
-    # Primary: saleshax.net custom domain (up to 45s)
-    for _ in range(18):
-        try:
-            r = requests.get(custom_url, timeout=5, verify=True, allow_redirects=True)
-            if r.status_code == 200 and "<!DOCTYPE" in r.text[:200].upper():
-                return custom_url  # Custom domain with valid SSL
-        except Exception:
-            pass
-        time.sleep(2.5)
-
-    # Fallback: netlify.app — but still return custom domain URL
-    # (SSL may take a few more seconds, the HTML itself forces HTTPS redirect)
-    for _ in range(5):
+    # Wait for netlify.app to be live first (always has SSL)
+    for _ in range(10):
         try:
             r = requests.get(netlify_url, timeout=5)
             if r.status_code == 200:
-                # Return custom domain anyway — it will resolve shortly
+                break
+        except Exception:
+            pass
+        time.sleep(2)
+
+    # Check if custom domain SSL is already valid
+    for _ in range(8):
+        try:
+            r = requests.get(custom_url, timeout=5, verify=True, allow_redirects=True)
+            if r.status_code == 200 and "<!DOCTYPE" in r.text[:200].upper():
                 return custom_url
         except Exception:
             pass
         time.sleep(2)
 
-    # Last resort: return custom domain (preferred) over netlify.app
-    return custom_url
+    # SSL not ready yet — return netlify.app (always secure)
+    return netlify_url
 
 
 def generate_pitchdeck(domain: str, api_key: str, netlify_token: str,

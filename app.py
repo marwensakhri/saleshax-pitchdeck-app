@@ -75,6 +75,7 @@ if generate and domain:
 
         # URL is already verified (SSL checked in core)
         live_url = result["live_url"]
+        custom_url = result.get("custom_domain_url", "")
 
         st.markdown(f"""
         <div class="result-box">
@@ -82,6 +83,9 @@ if generate and domain:
         </div>
         """, unsafe_allow_html=True)
 
+        # Show custom domain hint if we fell back to netlify.app
+        if custom_url and "netlify.app" in live_url:
+            st.info(f"Custom Domain **{custom_url}** wird in wenigen Minuten verfügbar sein (SSL wird provisioniert).")
 
         col1, col2 = st.columns(2)
         with col1:
