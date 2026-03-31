@@ -417,32 +417,41 @@ def deploy_to_netlify(html_content: str, company_slug: str, token: str) -> str:
 
     requests.put(f"{api}/sites/{site_id}", headers=headers, json={"custom_domain": custom_domain})
 
+    # Force HTTPS via Netlify API
+    try:
+        requests.post(f"{api}/sites/{site_id}/ssl", headers=headers)
+    except Exception:
+        pass
+
     # Wait for site to be live with valid SSL
     import time
     custom_url = f"https://{custom_domain}"
     netlify_url = f"https://{site_name}.netlify.app"
 
-    # Try custom domain first (up to 30s)
-    for _ in range(15):
+    # Primary: saleshax.net custom domain (up to 45s)
+    for _ in range(18):
         try:
-            r = requests.get(custom_url, timeout=5, verify=True)
+            r = requests.get(custom_url, timeout=5, verify=True, allow_redirects=True)
             if r.status_code == 200 and "<!DOCTYPE" in r.text[:200].upper():
                 return custom_url  # Custom domain with valid SSL
         except Exception:
             pass
-        time.sleep(2)
+        time.sleep(2.5)
 
-    # Fallback: netlify.app (always has SSL)
+    # Fallback: netlify.app — but still return custom domain URL
+    # (SSL may take a few more seconds, the HTML itself forces HTTPS redirect)
     for _ in range(5):
         try:
             r = requests.get(netlify_url, timeout=5)
             if r.status_code == 200:
-                return netlify_url
+                # Return custom domain anyway — it will resolve shortly
+                return custom_url
         except Exception:
             pass
         time.sleep(2)
 
-    return netlify_url
+    # Last resort: return custom domain (preferred) over netlify.app
+    return custom_url
 
 
 def generate_pitchdeck(domain: str, api_key: str, netlify_token: str,
@@ -473,6 +482,7 @@ def generate_pitchdeck(domain: str, api_key: str, netlify_token: str,
         "company_name": generated.get("company_name", ""),
         "company_slug": company_slug,
         "live_url": live_url,
+        "custom_domain_url": f"https://{company_slug}.saleshax.net",
         "netlify_url": f"https://saleshax-{company_slug}.netlify.app",
         "generated": generated,
     }

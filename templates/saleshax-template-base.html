@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SALESHAX × {{COMPANY_NAME}}</title>
 <meta name="description" content="SALESHAX Matchmaking-System — personalisierte Kampagnenanalyse für {{COMPANY_NAME}}">
+<!-- Force HTTPS -->
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:')location.replace(location.href.replace('http:','https:'));</script>
 <!-- Premium fonts: Cormorant Garamond + Outfit (sans) + DM Mono -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -869,9 +872,130 @@ footer::before{
 .dd-l{color:var(--mu)}.dd-v{font-weight:500;max-width:130px;text-align:right}
 .dd-v.grn{color:var(--grn)}.dd-v.ac{color:var(--bl2)}
 .dd-st{display:flex;align-items:center;gap:5px;margin-top:10px;font-size:11px;font-weight:500;color:var(--grn)}
+
+/* ══ SMOOTH BACKGROUND MOTION — floating gradient orbs ══ */
+.bg-motion{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+}
+.bg-motion .orb{
+  position:absolute;border-radius:50%;
+  filter:blur(120px);opacity:.035;
+  will-change:transform;
+}
+.bg-motion .orb-1{
+  width:clamp(400px,50vw,800px);height:clamp(400px,50vw,800px);
+  background:radial-gradient(circle,rgba(107,114,128,.8),transparent 70%);
+  top:-15%;left:-10%;
+  animation:orb-drift-1 25s ease-in-out infinite;
+}
+.bg-motion .orb-2{
+  width:clamp(300px,40vw,700px);height:clamp(300px,40vw,700px);
+  background:radial-gradient(circle,rgba(154,122,56,.7),transparent 70%);
+  bottom:-10%;right:-8%;
+  animation:orb-drift-2 30s ease-in-out infinite;
+}
+.bg-motion .orb-3{
+  width:clamp(250px,35vw,600px);height:clamp(250px,35vw,600px);
+  background:radial-gradient(circle,rgba(26,158,101,.5),transparent 70%);
+  top:40%;left:50%;transform:translateX(-50%);
+  animation:orb-drift-3 22s ease-in-out infinite;
+}
+@keyframes orb-drift-1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(8vw,6vh) scale(1.08)}
+  50%{transform:translate(3vw,12vh) scale(.95)}
+  75%{transform:translate(-5vw,4vh) scale(1.04)}
+}
+@keyframes orb-drift-2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(-6vw,-8vh) scale(1.06)}
+  50%{transform:translate(-10vw,-3vh) scale(.92)}
+  75%{transform:translate(4vw,-6vh) scale(1.03)}
+}
+@keyframes orb-drift-3{
+  0%,100%{transform:translateX(-50%) translate(0,0) scale(1)}
+  33%{transform:translateX(-50%) translate(6vw,-5vh) scale(1.1)}
+  66%{transform:translateX(-50%) translate(-4vw,7vh) scale(.94)}
+}
+/* Respect reduced motion preference */
+@media(prefers-reduced-motion:reduce){
+  .bg-motion .orb{animation:none!important}
+}
+
+/* ══ ENHANCED MICRO-INTERACTIONS (UI/UX Pro Max) ══ */
+/* Smoother, more deliberate hover transitions (250ms) */
+a,button,.cta,.camp-c,.prob-c,.scatter-c,.case-ctx,.sol-item,.ads-arg,.s-field,.dl-r{
+  transition-duration:.25s;transition-timing-function:cubic-bezier(0.16,1,0.3,1);
+}
+/* Enhanced card hover — subtle lift + refined shadow */
+.camp-c:hover,.prob-c:hover,.case-ctx:hover,.scatter-c:hover,.msg-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
+}
+/* Interactive elements get pointer cursor */
+.cta,.camp-c,.prob-c,.scatter-c,.case-ctx,.dl-r,.s-field input,.s-field select{cursor:pointer}
+/* Softer focus states for accessibility (visible but elegant) */
+*:focus-visible{
+  outline:2px solid rgba(107,114,128,.4);
+  outline-offset:3px;
+  border-radius:4px;
+}
+/* Smoother nav glass effect — deeper blur + subtle border glow on scroll */
+nav{
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.06);
+}
+nav:hover{
+  border-color:rgba(0,0,0,.1);
+  box-shadow:0 12px 48px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);
+}
+/* Hero section — deeper radial glow for premium depth */
+#hero{
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(107,114,128,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(154,122,56,.025) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 25% at 80% 60%, rgba(26,158,101,.02) 0%, transparent 50%),
+    var(--bg);
+}
+/* Stat numbers — refined number animation on scroll */
+.stat-n{transition:color .4s ease,text-shadow .4s ease}
+.stat-n:hover{text-shadow:0 0 30px rgba(107,114,128,.12)}
+/* Bridge section — enhanced glow */
+.bridge{
+  box-shadow:0 0 60px rgba(107,114,128,.04),0 0 120px rgba(107,114,128,.02),inset 0 1px 0 rgba(255,255,255,.5);
+}
+/* Guarantee checkmarks — subtle pulse on hover */
+.chk{transition:transform .25s var(--ease-spring),box-shadow .25s ease}
+.guar-pts li:hover .chk{transform:scale(1.12);box-shadow:0 0 12px rgba(26,158,101,.2)}
+/* CTA button — premium hover glow */
+.cta:hover{
+  border-color:rgba(30,30,28,.5);
+  box-shadow:0 0 32px rgba(107,114,128,.12),0 4px 16px rgba(0,0,0,.06);
+}
+/* Email card — subtle depth on hover */
+.email:hover{box-shadow:0 8px 28px rgba(0,0,0,.06)}
+.email{transition:box-shadow .25s ease}
+/* Dashboard — refined glass effect */
+.dash{
+  box-shadow:0 20px 64px rgba(0,0,0,.07),0 0 0 1px rgba(0,0,0,.04);
+}
+/* Rechner output — pulsing glow when values change */
+.rechner-val{transition:color .3s ease,text-shadow .3s ease}
+/* Refined gold accent strip — smoother gradient */
+body::after{
+  background:linear-gradient(90deg,transparent 8%,rgba(154,122,56,.15) 25%,var(--gld) 45%,var(--gld2) 55%,rgba(154,122,56,.15) 75%,transparent 92%);
+  opacity:.35;
+}
 </style>
 </head>
 <body>
+<!-- Smooth background motion orbs -->
+<div class="bg-motion" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
 <nav><a href="#" class="nav-b"><svg width="120" height="14" viewBox="0 0 1244 149" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M890.594 131.067V2.31396H861.668V70.202H796.26V2.27295H767.354V146.127H796.26V75.0101H861.668V146.097H890.616V131.067H890.594Z" fill="currentColor"/><path d="M1025.03 100.199L1041.9 146.189H1073.73L1067.95 131.283L1017.88 2.27295H1000.45L988.777 33.0286L947.541 146.138H951.987L969.252 100.148L1025.03 100.199ZM997.372 25.1757L1023.14 95.2986H971.077L997.372 25.1757Z" fill="currentColor"/><path d="M1114.01 2.26855L1123.97 17.3593L1164.46 78.3683L1124.4 131.678L1113.49 146.185H1148.01V144.134L1131.38 131.073H1131.07L1167.46 82.9509L1199.53 131.248L1209.43 146.154H1243.19L1233.31 131.278L1189.17 64.7743L1223.56 20.6297L1226.49 16.8775L1237.89 2.2788H1202.39V4.26767L1219.37 17.3696L1219.61 17.5644L1186.24 60.2737L1147.64 2.2583L1114.01 2.26855Z" fill="currentColor"/><path d="M699.892 91.9961C697.58 87.3814 694.44 83.199 690.617 79.6426C686.515 75.8575 681.967 72.5508 677.067 69.7905C671.924 66.8653 666.561 64.0324 660.98 61.2917C656.155 58.9543 651.497 56.6544 647.005 54.3922C642.851 52.3453 638.895 49.9436 635.184 47.2158C631.985 44.8713 629.219 42.0223 627.002 38.7888C624.962 35.7413 623.933 32.1646 624.052 28.5369C624.06 25.1812 624.745 21.859 626.069 18.7566C627.281 15.9572 629.088 13.4354 631.374 11.3547C633.685 9.26792 636.401 7.64419 639.365 6.57735C642.576 5.42825 645.978 4.85501 649.403 4.88579C652.244 4.88379 655.082 5.08597 657.892 5.49065C660.947 5.96805 663.921 6.84404 666.731 8.09463C670.775 10.2859 674.455 13.0504 677.65 16.2961C680.714 19.3572 683.518 22.6519 686.034 26.1482C688.218 29.1733 690.207 32.3267 691.987 35.5902C693.571 38.5564 694.816 40.9075 695.722 42.6435H697.165V10.6781L694.586 9.47863H694.385C687.964 6.65336 681.295 4.38891 674.456 2.71239C667.568 0.97537 660.48 0.0866608 653.361 0.0673985C646.166 0.0231033 638.992 0.832217 632 2.47659C625.995 3.84034 620.306 6.27404 615.224 9.65292C610.613 12.7641 606.835 16.8894 604.199 21.6886C601.435 26.8973 600.033 32.68 600.113 38.5325C599.938 43.8202 601.204 49.0596 603.785 53.7258C606.376 58.2007 609.746 62.2099 613.749 65.577C618.019 69.1954 622.663 72.38 627.607 75.0805C632.743 77.91 637.932 80.6609 643.174 83.3333C647.794 85.6707 652.261 88.0218 656.576 90.3866C660.619 92.5783 664.445 95.1246 668.005 97.9935C671.151 100.499 673.832 103.505 675.932 106.882C677.898 110.167 678.882 113.914 678.775 117.708C678.74 120.853 678.166 123.971 677.078 126.935C675.978 130.048 674.238 132.915 671.963 135.362C669.496 137.971 666.502 140.064 663.166 141.513C659.154 143.202 654.808 144.025 650.432 143.922H647.121C642.227 143.951 637.399 142.832 633.051 140.662C628.552 138.388 624.434 135.471 620.837 132.009C616.891 128.236 613.337 124.098 610.226 119.656C606.957 115.029 603.866 110.244 600.952 105.303H599.392V138.109L601.97 139.206C604.595 140.347 607.562 141.482 610.873 142.61C614.406 143.815 618 144.841 621.643 145.685C625.671 146.615 629.749 147.334 633.857 147.838C638.182 148.381 642.538 148.655 646.899 148.658C654.315 148.708 661.714 147.938 668.949 146.362C675.299 145.033 681.346 142.601 686.797 139.186C691.802 135.992 695.925 131.667 698.809 126.586C701.882 120.913 703.429 114.585 703.309 108.184C703.498 102.642 702.347 97.1344 699.945 92.0986" fill="currentColor"/><path d="M100.479 91.8992C98.1568 87.3003 95.0097 83.1352 91.1835 79.5969C87.0842 75.8041 82.54 72.4873 77.6434 69.7141C72.5004 66.7821 67.1346 63.9423 61.5459 61.1948C56.7213 58.8642 52.0664 56.578 47.5814 54.3363C43.4278 52.2889 39.4717 49.8872 35.7603 47.1599C32.56 44.7926 29.7974 41.9191 27.5896 38.6611C25.5552 35.6114 24.53 32.0356 24.6502 28.4092C24.6614 25.0572 25.3461 21.7391 26.6664 18.6392C27.8788 15.8401 29.6864 13.3184 31.972 11.2373C34.2756 9.13674 36.988 7.49895 39.9518 6.41893C43.1631 5.26701 46.5648 4.69031 49.9901 4.71712C52.8314 4.71621 55.6689 4.91839 58.4792 5.32198C61.5372 5.80081 64.5141 6.67673 67.3291 7.92596C71.3706 10.1202 75.0508 12.8844 78.2482 16.1275C81.311 19.1894 84.1143 22.484 86.6312 25.9795C88.8188 29.003 90.8071 32.1565 92.5842 35.4215C94.1688 38.3877 95.4139 40.7388 96.3194 42.4748H97.7307V10.694L95.1521 9.42273H94.9505C88.5298 6.59791 81.8606 4.33348 75.0224 2.65649C68.1343 0.917195 61.0464 0.025061 53.927 0.00124651C46.7453 -0.0363392 39.5859 0.776195 32.6087 2.42069C26.6074 3.78632 20.9217 6.21993 15.8428 9.59702C11.2362 12.6951 7.45738 16.8062 4.81756 21.5917C2.05251 26.8035 0.649901 32.5899 0.732184 38.4458C0.556071 43.7337 1.82225 48.9733 4.40372 53.6391C6.99185 58.1158 10.363 62.1254 14.3678 65.4903C18.6409 69.1097 23.2884 72.2944 28.2368 74.9938C33.3798 77.837 38.5688 80.5879 43.8037 83.2466C48.4232 85.584 52.8906 87.9351 57.2059 90.2999C61.2558 92.4909 65.0886 95.0373 68.6555 97.9068C71.7967 100.415 74.4736 103.42 76.5716 106.795C78.5477 110.076 79.5329 113.827 79.4155 117.621C79.3891 120.765 78.8226 123.883 77.7389 126.848C76.6334 129.963 74.8863 132.83 72.603 135.275C70.1354 137.883 67.1418 139.977 63.8061 141.426C59.7774 143.122 55.4127 143.945 51.0194 143.835H47.7511C42.857 143.864 38.0287 142.745 33.6805 140.575C29.1817 138.301 25.064 135.384 21.4668 131.923C17.52 128.15 13.9659 124.012 10.8554 119.569C7.58005 114.942 4.48153 110.158 1.55987 105.216H0V138.227L2.58917 139.324C5.21372 140.466 8.17783 141.6 11.4815 142.728C15.0144 143.932 18.6094 144.958 22.252 145.804C26.2801 146.734 30.3573 147.452 34.4657 147.957C38.7902 148.499 43.1463 148.773 47.5071 148.777C54.9203 148.826 62.315 148.055 69.5469 146.48C75.8994 145.149 81.95 142.718 87.4058 139.304C92.4315 136.078 96.56 131.71 99.4285 126.581C102.499 120.908 104.046 114.58 103.928 108.179C104.128 102.566 102.95 96.9875 100.49 91.8992" fill="currentColor"/><path d="M541.169 130.739L530.271 141.258H480.685V74.6203H525.072V62.031H514.46L507.871 69.7199H480.642V7.18337H523.809L534.707 17.7018H546.719V2.32397H451.599V146.189H553.001L555.176 130.811L541.169 130.739Z" fill="currentColor"/><path d="M392.73 130.791L384.241 141.258H342.411V2.27295H313.526V146.117H407.002L409.177 130.739L392.73 130.791Z" fill="currentColor"/><path d="M214.316 2.27295H196.881L142.084 146.158H148.387L154.054 131.067L165.662 100.179H221.436L232.822 131.16L238.34 146.138H270.174L214.316 2.27295ZM167.541 95.2371L193.846 25.1142L219.621 95.2371H167.541Z" fill="currentColor"/></svg></a><span class="nav-r">Matchmaking-System · {{COMPANY_NAME}}</span></nav>
 <!-- ═══ HERO ═══ -->
 <section id="hero">
