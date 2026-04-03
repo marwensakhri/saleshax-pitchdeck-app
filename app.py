@@ -31,13 +31,9 @@ domain = st.text_input("Lead-Domain", placeholder="z.B. cluetec-audit.de", label
 
 generate = st.button("Pitch Deck generieren", type="primary", use_container_width=True)
 
-# --- API Keys ---
+# --- API Keys (ANTHROPIC_API_KEY optional — Claude CLI wird bevorzugt) ---
 api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
 netlify_token = st.secrets.get("NETLIFY_TOKEN", "")
-
-if not api_key:
-    st.error("ANTHROPIC_API_KEY fehlt in den Secrets.")
-    st.stop()
 
 # --- Generate ---
 if generate and domain:

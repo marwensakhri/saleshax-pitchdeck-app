@@ -7,11 +7,12 @@ import re
 import json
 import hashlib
 import textwrap
+import subprocess
+import shutil
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
-import anthropic
 
 MODEL = "claude-sonnet-4-6"
 CTA_LINK = "https://meetings.hubspot.com/alex-akopjan/beratung?uuid=5596b6ee-2b06-4c9a-977a-bc7b208e170f"
@@ -118,9 +119,36 @@ def fetch_website(domain: str) -> dict:
     }
 
 
-def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -> dict:
-    client = anthropic.Anthropic(api_key=api_key)
+def _call_claude_cli(full_prompt: str) -> str:
+    """Try calling Claude CLI (uses plan usage, no API credits)."""
+    claude_path = shutil.which("claude") or "/Users/marwen/.local/bin/claude"
+    if not Path(claude_path).exists():
+        raise FileNotFoundError("Claude CLI not found")
 
+    import os
+    env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
+    result = subprocess.run(
+        [claude_path, "--print", "--model", MODEL, "-p", full_prompt],
+        capture_output=True, text=True, timeout=180, env=env,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"Claude CLI failed: {result.stderr[:300]}")
+    return result.stdout.strip()
+
+
+def _call_claude_api(system_prompt: str, user_prompt: str, api_key: str) -> str:
+    """Fallback: call Anthropic API directly (uses API credits)."""
+    import anthropic
+    client = anthropic.Anthropic(api_key=api_key)
+    message = client.messages.create(
+        model=MODEL, max_tokens=4096,
+        messages=[{"role": "user", "content": user_prompt}],
+        system=system_prompt,
+    )
+    return message.content[0].text.strip()
+
+
+def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -> dict:
     playbook_text = ""
     if playbook_path and playbook_path.exists():
         playbook_text = playbook_path.read_text(encoding="utf-8")
@@ -291,13 +319,14 @@ def analyze_with_claude(website_data: dict, api_key: str, playbook_path: Path) -
         WICHTIG: Antworte NUR mit dem JSON-Objekt. Kein Text davor oder danach. Keine Erklärungen. Nur valides JSON. Stelle sicher dass alle Strings korrekt escaped sind (besonders Anführungszeichen in HTML-Attributen).
     """).strip()
 
-    message = client.messages.create(
-        model=MODEL, max_tokens=4096,
-        messages=[{"role": "user", "content": user_prompt}],
-        system=system_prompt,
-    )
-
-    raw = message.content[0].text.strip()
+    # Try Claude CLI first (plan usage), fall back to API (credits)
+    try:
+        full_prompt = f"{system_prompt}\n\n---\n\n{user_prompt}"
+        raw = _call_claude_cli(full_prompt)
+    except (FileNotFoundError, RuntimeError):
+        if not api_key:
+            raise RuntimeError("Claude CLI nicht verfügbar und kein ANTHROPIC_API_KEY gesetzt.")
+        raw = _call_claude_api(system_prompt, user_prompt, api_key)
     # Try to extract JSON from markdown code block first
     json_match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", raw)
     if json_match:
